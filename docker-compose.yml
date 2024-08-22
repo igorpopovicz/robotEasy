@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./robot_easy_api
+      dockerfile: Dockerfile
+    container_name: robot_easy_api
+    ports:
+      - "8080:8080"
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: ./robot_easy_front
+      dockerfile: Dockerfile
+    container_name: robot_easy_front
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

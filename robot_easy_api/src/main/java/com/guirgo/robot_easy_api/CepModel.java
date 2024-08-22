@@ -4,8 +4,8 @@ public class CepModel {
     private String cep;
     private String logradouro;
     private String bairro;
-    private String cidade;
-    private String estado;
+    private String localidade;
+    private String uf;
 
     public String getCep() {
         return this.cep;
@@ -31,20 +31,20 @@ public class CepModel {
         this.bairro = bairro;
     }
 
-    public String getCidade() {
-        return this.cidade;
+    public String getLocalidade() {
+        return this.localidade;
     }
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setLocalidade(String localidade) {
+        this.localidade = localidade;
     }
 
-    public String getEstado() {
-        return this.estado;
+    public String getUf() {
+        return this.uf;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setUf(String uf) {
+        this.uf = uf;
     }
 
 }

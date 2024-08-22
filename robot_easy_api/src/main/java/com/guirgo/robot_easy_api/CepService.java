@@ -11,13 +11,25 @@ public class CepService {
     @Autowired
     private WebClient.Builder webClientBuilder;
 
+    
+    private final WebClient webClient;
+
+    public CepService(WebClient.Builder webClientBuilder) {
+        this.webClient = webClientBuilder.baseUrl("https://viacep.com.br/ws").build();
+    }
+
     @Cacheable(value = "cepCache", key = "#cep")
     public CepModel getCep(String cep) {
-        return webClientBuilder.build()
-                .get()
-                .uri("https://viacep.com.br/ws/" + cep + "/json/")
+        if (cep == null || cep.isEmpty()) {
+            throw new IllegalArgumentException("CEP não pode ser nulo ou vazio");
+        }
+
+        return this.webClient.get()
+                .uri("/{cep}/json/", cep)
                 .retrieve()
                 .bodyToMono(CepModel.class)
                 .block();
     }
+
+    
 }
